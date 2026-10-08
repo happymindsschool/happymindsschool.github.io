@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="HAPPY Minds — Learning for Life. A child-centred school in Yadagirigutta, opening 2027." />
+<title>HAPPY Minds — Learning for Life</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap');
+
+  :root{
+    --navy:#0F172A;
+    --navy-2:#17243b;
+    --gold:#D97706;
+    --gold-soft:#F5C76B;
+    --cream:#FBF7EF;
+    --cream-2:#F3EBDD;
+    --white:#fffdf9;
+    --ink:#172033;
+    --muted:#667085;
+    --line:rgba(15,23,42,.10);
+    --radius:28px;
+    --shadow:0 24px 70px rgba(15,23,42,.10);
+  }
+
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;line-height:1.6;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit}
+  img{display:block;max-width:100%}
+
+  .progress{position:fixed;top:0;left:0;height:3px;background:var(--gold);width:0;z-index:1000}
+  .nav{
+    position:fixed;top:18px;left:50%;transform:translateX(-50%);
+    width:min(1180px,calc(100% - 36px));height:68px;padding:0 14px 0 22px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+    background:rgba(255,253,249,.84);backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.75);box-shadow:0 12px 40px rgba(15,23,42,.08);
+    border-radius:999px;z-index:100;
+  }
+  .brand{display:flex;align-items:center;gap:10px;min-width:max-content}
+  .mark{width:40px;height:40px;border:1.5px solid var(--gold);border-radius:12px;display:grid;place-items:center;color:var(--gold);font-family:Georgia,serif;font-size:19px}
+  .brand strong{font-family:"Playfair Display",serif;font-size:18px;letter-spacing:-.02em}
+  .brand span{display:block;color:var(--gold);font-size:9px;letter-spacing:.14em;text-transform:uppercase;margin-top:-3px}
+  .navlinks{display:flex;gap:26px;align-items:center;font-size:13px;color:#455066}
+  .navlinks a{position:relative;padding:8px 0}
+  .navlinks a:after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold);transition:.3s}
+  .navlinks a:hover:after{width:100%}
+  .navcta,.btn-primary{background:var(--gold);color:white;border:0}
+  .navcta{padding:12px 19px;border-radius:999px;font-weight:600;font-size:12px;cursor:pointer}
+  .menu{display:none;border:0;background:none;font-size:25px;color:var(--navy);cursor:pointer}
+
+  .hero{min-height:100vh;padding:150px 6vw 0;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:40px;position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;width:650px;height:650px;border-radius:50%;background:rgba(217,119,6,.07);filter:blur(3px);right:-240px;top:120px}
+  .eyebrow,.section-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  h1,h2,h3{font-family:"Playfair Display",serif;font-weight:600;line-height:1.03;letter-spacing:-.035em;margin:0}
+  h1{font-size:clamp(58px,7.4vw,104px);max-width:720px}
+  h1 em{font-style:normal;color:var(--gold)}
+  .hero-sub{font-family:"Playfair Display",serif;color:var(--gold);font-size:clamp(24px,2.7vw,38px);margin:7px 0 18px}
+  .hero-copy{font-size:17px;color:#596477;max-width:510px}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 21px;border-radius:999px;border:1px solid var(--navy);font-weight:600;font-size:13px;transition:.35s;cursor:pointer}
+  .btn-primary{border-color:var(--gold)}
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(15,23,42,.12)}
+  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;color:#667085;font-size:12px}
+  .hero-meta b{color:var(--navy);display:block;margin-bottom:2px}
+  .hero-media{position:relative;z-index:1}
+  .hero-image{height:min(660px,72vh);min-height:540px;object-fit:cover;border-radius:46% 46% 20px 20px;box-shadow:var(--shadow)}
+  .scribble{position:absolute;right:-30px;bottom:70px;font-family:"Playfair Display",serif;font-style:italic;color:white;font-size:22px;line-height:1.1;transform:rotate(-5deg);text-shadow:0 2px 12px rgba(0,0,0,.25)}
+  .scroll-cue{position:absolute;left:6vw;bottom:24px;font-size:11px;color:#8891a0;display:flex;align-items:center;gap:10px}
+  .scroll-cue i{display:block;width:38px;height:1px;background:#c5a86b}
+
+  .trustbar{margin:0 6vw;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .trustitem{display:flex;align-items:center;gap:12px;font-size:13px;color:#667085}
+  .trusticon{width:36px;height:36px;border-radius:50%;background:#f3e7cf;color:var(--gold);display:grid;place-items:center}
+  .trustitem strong{display:block;color:var(--navy);font-size:13px}
+
+  section{padding:120px 6vw}
+  .split{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
+  .section-title{font-size:clamp(40px,4.6vw,68px);max-width:680px}
+  .body-lg{font-size:17px;color:#687386;max-width:600px}
+  .link{display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-weight:600;font-size:13px;margin-top:18px}
+  .philosophy-media{position:relative}
+  .philosophy-media img{height:520px;width:100%;object-fit:cover;border-radius:32px}
+  .floating-note{position:absolute;right:-24px;bottom:-30px;width:220px;background:#fffdf8;padding:25px;border-radius:22px;box-shadow:var(--shadow);font-family:"Playfair Display",serif;font-size:22px;line-height:1.15}
+  .floating-note small{display:block;font-family:"DM Sans";font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+
+  .cream-band{background:var(--cream-2)}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+  .quiet-card{padding:34px;border-radius:26px;background:rgba(255,253,249,.72);border:1px solid rgba(15,23,42,.06);transition:.4s}
+  .quiet-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .quiet-icon{width:48px;height:48px;border-radius:50%;background:#f7ead1;color:var(--gold);display:grid;place-items:center;font-size:21px;margin-bottom:24px}
+  .quiet-card h3{font-size:29px;margin-bottom:10px}
+  .quiet-card p{color:#687386;margin:0;font-size:14px}
+
+  .academics{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .photo-stack{position:relative;min-height:560px}
+  .photo-stack img:first-child{position:absolute;left:0;top:0;width:74%;height:500px;object-fit:cover;border-radius:34px}
+  .photo-stack img:last-child{position:absolute;right:0;bottom:0;width:48%;height:270px;object-fit:cover;border:12px solid var(--cream);border-radius:30px}
+  .pill-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:28px}
+  .pill{padding:17px;border:1px solid var(--line);border-radius:17px;background:#fffaf1;font-size:13px}
+  .pill b{display:block;margin-bottom:4px;color:var(--navy)}
+
+  .wheel{position:relative;overflow:hidden;background:var(--navy);color:white;padding-top:110px;padding-bottom:110px}
+  .wheel:after{content:"";position:absolute;width:480px;height:480px;border:1px solid rgba(255,255,255,.09);border-radius:50%;right:-180px;top:-180px}
+  .wheel .section-eyebrow{color:var(--gold-soft)}
+  .wheel-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:80px;align-items:center}
+  .wheel h2{font-size:clamp(44px,5vw,72px)}
+  .wheel-copy{color:#b9c1cf;max-width:520px}
+  .wheel-items{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .wheel-item{min-height:150px;padding:18px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:rgba(255,255,255,.04);display:flex;flex-direction:column;justify-content:space-between;transition:.4s}
+  .wheel-item:hover{background:rgba(255,255,255,.09);transform:translateY(-5px)}
+  .wheel-item .dot{width:38px;height:38px;border-radius:50%;background:rgba(217,119,6,.18);color:var(--gold-soft);display:grid;place-items:center}
+  .wheel-item b{font-size:13px}
+
+  .day{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:start}
+  .day-list{margin-top:35px;border-top:1px solid var(--line)}
+  .day-row{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .day-row time{font-size:12px;color:var(--gold);font-weight:600}
+  .day-row b{display:block}
+  .day-row span{font-size:13px;color:#7a8494}
+
+  .programs-head{display:flex;align-items:end;justify-content:space-between;gap:30px}
+  .programs{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:45px}
+  .program{overflow:hidden;border-radius:24px;background:white;border:1px solid var(--line);transition:.4s}
+  .program:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+  .program img{height:190px;width:100%;object-fit:cover}
+  .program-body{padding:19px}
+  .program h3{font-size:21px}
+  .program p{font-size:11px;color:#7a8494;margin:5px 0 10px}
+  .program b{color:var(--gold);font-size:12px}
+
+  .life{padding-bottom:40px}
+  .gallery{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-auto-rows:240px;gap:14px;margin-top:44px}
+  .gallery .tile{overflow:hidden;border-radius:26px;position:relative}
+  .gallery .tile:first-child{grid-row:span 2}
+  .gallery img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+  .gallery .tile:hover img{transform:scale(1.06)}
+  .gallery .caption{position:absolute;left:18px;bottom:16px;background:rgba(15,23,42,.72);color:white;padding:7px 11px;border-radius:999px;font-size:11px;backdrop-filter:blur(8px)}
+
+  .founder{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .founder img{width:100%;height:510px;object-fit:cover;border-radius:32px}
+  .founder-quote{font-family:"Playfair Display",serif;font-size:31px;line-height:1.2;color:var(--navy);margin:24px 0}
+
+  .cta{margin:30px 6vw 100px;border-radius:38px;overflow:hidden;position:relative;min-height:470px;display:flex;align-items:center;padding:70px;background:var(--navy);color:white}
+  .cta:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,23,42,.96) 0%,rgba(15,23,42,.78) 48%,rgba(15,23,42,.12) 100%),url('assets/cta-campus.jpg') center/cover}
+  .cta-content{position:relative;z-index:2;max-width:620px}
+  .cta h2{font-size:clamp(45px,5vw,72px)}
+  .cta p{color:#d4d9e1;max-width:520px}
+  .cta .btn{border-color:white;color:white}
+  .cta .btn-primary{border-color:var(--gold)}
+
+  footer{background:var(--navy);color:white;padding:60px 6vw 35px}
+  .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:50px}
+  footer .brand strong{color:white}
+  footer .brand span{color:var(--gold-soft)}
+  footer p,footer a{color:#9da8b9;font-size:13px}
+  footer h4{margin:0 0 14px;font-size:12px;text-transform:uppercase;letter-spacing:.15em;color:#fff}
+  .copyright{border-top:1px solid rgba(255,255,255,.10);margin-top:50px;padding-top:20px;display:flex;justify-content:space-between;color:#7f8a9b;font-size:11px}
+
+
+  .brand img{width:178px;height:auto;display:block}
+  .mobile-menu{display:none}
+  @media(max-width:900px){
+    .nav{background:rgba(255,253,249,.94)}
+    .brand img{width:152px}
+    .mobile-menu{position:fixed;inset:0;background:rgba(15,23,42,.32);backdrop-filter:blur(8px);z-index:200;opacity:0;pointer-events:none;transition:opacity .35s ease;display:block}
+    .mobile-menu.open{opacity:1;pointer-events:auto}
+    .mobile-menu-inner{position:absolute;right:0;top:0;bottom:0;width:min(88vw,390px);background:var(--cream);padding:22px;transform:translateX(100%);transition:transform .45s cubic-bezier(.2,.8,.2,1);box-shadow:-20px 0 60px rgba(15,23,42,.15);display:flex;flex-direction:column}
+    .mobile-menu.open .mobile-menu-inner{transform:none}
+    .mobile-menu-top{display:flex;justify-content:space-between;align-items:center;padding-bottom:35px}
+    .mobile-menu-top img{width:155px}
+    .mobile-menu-top button{border:0;background:#eee7db;border-radius:50%;width:40px;height:40px;font-size:25px;color:var(--navy);cursor:pointer}
+    .mobile-menu nav{display:flex;flex-direction:column}
+    .mobile-menu nav a{font-family:"Playfair Display",serif;font-size:28px;padding:18px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between}
+    .mobile-menu nav a span{font-family:"DM Sans";font-size:18px;color:var(--gold)}
+    .mobile-menu-actions{margin-top:auto;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .mobile-menu-actions a{background:var(--navy);color:white;text-align:center;padding:14px;border-radius:14px;font-size:13px;font-weight:600}
+    .mobile-menu-actions a:last-child{background:var(--gold)}
+  }
+
+  .mobile-bar{display:none}
+
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
+  .reveal.visible{opacity:1;transform:none}
+  .delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}.delay-3{transition-delay:.24s}
+
+  .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(8px);display:none;place-items:center;z-index:500;padding:20px}
+  .modal.open{display:grid}
+  .modal-card{background:var(--cream);max-width:520px;width:100%;padding:38px;border-radius:30px;box-shadow:0 30px 100px rgba(0,0,0,.25);position:relative}
+  .modal-card h2{font-size:42px}
+  .close{position:absolute;right:20px;top:20px;border:0;background:#eee7db;border-radius:50%;width:38px;height:38px;cursor:pointer}
+  .form{display:grid;gap:12px;margin-top:24px}
+  .form input,.form select{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:white;font:inherit;outline:none}
+  .form input:focus,.form select:focus{border-color:var(--gold)}
+
+  @media(max-width:900px){
+    .nav{top:10px;width:calc(100% - 20px);height:60px}
+    .navlinks,.navcta{display:none}.menu{display:block}
+    .hero{padding:115px 22px 50px;display:block}
+    h1{font-size:58px}
+    .hero-media{margin-top:45px}.hero-image{height:58vh;min-height:450px}
+    .scribble{right:10px;bottom:40px}
+    .scroll-cue{display:none}
+    .trustbar{margin:0 22px;grid-template-columns:1fr 1fr}
+    section{padding:82px 22px}
+    .split,.academics,.day,.founder,.wheel-grid{grid-template-columns:1fr;gap:45px}
+    .three{grid-template-columns:1fr}
+    .philosophy-media img{height:430px}
+    .floating-note{right:10px}
+    .photo-stack{min-height:470px}.photo-stack img:first-child{height:410px}
+    .wheel-items{grid-template-columns:1fr 1fr}
+    .programs{grid-template-columns:repeat(2,1fr)}
+    .program:last-child{grid-column:span 2}
+    .gallery{grid-template-columns:1fr 1fr;grid-auto-rows:190px}
+    .gallery .tile:first-child{grid-row:span 1;grid-column:span 2}
+    .founder img{height:420px}
+    .cta{margin:10px 22px 70px;padding:42px 28px;min-height:480px}
+    .footer-grid{grid-template-columns:1fr 1fr}
+    .copyright{display:block}
+    .copyright span{display:block;margin-top:8px}
+    .mobile-bar{position:fixed;bottom:12px;left:12px;right:12px;display:grid;grid-template-columns:1fr 1fr 1.2fr;background:rgba(15,23,42,.95);border-radius:18px;padding:6px;z-index:90;box-shadow:0 15px 40px rgba(15,23,42,.28)}
+    .mobile-bar a,.mobile-bar button{border:0;background:none;color:white;padding:12px 6px;font-size:11px;font-weight:600}
+    .mobile-bar a:last-child,.mobile-bar button:last-child{background:var(--gold);border-radius:13px}
+  }
+
+  @media(max-width:560px){
+    .hero{padding-top:105px;min-height:auto}
+    .hero .eyebrow{max-width:270px;line-height:1.5}
+    .hero h1{font-size:52px;line-height:.98}
+    .hero-sub{font-size:27px;margin-top:10px}
+    .hero-copy{font-size:15px;line-height:1.7}
+    .actions{display:grid;grid-template-columns:1fr;gap:9px}
+    .actions .btn{justify-content:center;width:100%}
+    .hero-media{margin:34px -22px 0}
+    .hero-image{width:100%;height:390px;min-height:0;border-radius:38px 38px 0 0;object-position:center}
+    .scribble{right:18px;bottom:28px;font-size:17px}
+    .trustbar{margin:0;padding:22px;grid-template-columns:1fr 1fr;gap:18px;border-top:0}
+    .trustitem{align-items:flex-start}
+    .trustitem div:last-child{line-height:1.35}
+    .trustitem strong{font-size:12px}
+    section{padding:76px 22px}
+    .split{gap:32px}
+    .section-title{font-size:43px}
+    .body-lg{font-size:15px;line-height:1.7}
+    .philosophy-media img{height:350px;border-radius:26px}
+    .floating-note{position:relative;right:auto;bottom:auto;margin:-40px 14px 0 auto;width:205px}
+    .three{gap:10px;margin-top:30px}
+    .quiet-card{padding:25px}
+    .quiet-card h3{font-size:26px}
+    .wheel{padding-top:76px;padding-bottom:76px}
+    .wheel-grid{gap:35px}
+    .wheel h2{font-size:45px}
+    .wheel-items{grid-template-columns:1fr 1fr;gap:9px}
+    .wheel-item{min-height:118px;padding:14px;border-radius:17px}
+    .wheel-item b{font-size:11px}
+    .photo-stack{min-height:380px}
+    .photo-stack img:first-child{height:330px;width:82%;border-radius:26px}
+    .photo-stack img:last-child{height:190px;width:50%;border-width:8px;border-radius:22px}
+    .pill-grid{gap:8px}
+    .pill{padding:14px;font-size:12px}
+    .day{gap:30px}
+    .day-row{grid-template-columns:68px 1fr;gap:10px;padding:17px 0}
+    .programs-head{display:block}
+    .programs-head .link{margin-top:10px}
+    .programs{display:flex;overflow-x:auto;gap:12px;margin-top:28px;padding-bottom:10px;scroll-snap-type:x mandatory}
+    .program{min-width:235px;scroll-snap-align:start}
+    .program img{height:155px}
+    .gallery{display:flex;overflow-x:auto;gap:10px;margin-top:28px;padding-bottom:10px;scroll-snap-type:x mandatory}
+    .gallery .tile,.gallery .tile:first-child{min-width:78vw;height:280px;flex:none;scroll-snap-align:start}
+    .founder{gap:32px}
+    .founder img{height:360px;border-radius:26px}
+    .founder-quote{font-size:26px}
+    .cta{margin:0 14px 72px;border-radius:28px;min-height:500px;padding:34px 24px;align-items:flex-end}
+    .cta:after{background:linear-gradient(0deg,rgba(15,23,42,.98) 10%,rgba(15,23,42,.56) 72%,rgba(15,23,42,.12) 100%),url('assets/cta-campus.jpg') center/cover}
+    .cta h2{font-size:46px}
+    footer{padding:48px 22px 95px}
+    .footer-grid{gap:30px}
+    .copyright{margin-top:35px}
+  }
+
+  @media(max-width:560px){
+    h1{font-size:49px}
+    .hero-sub{font-size:26px}
+    .hero-copy{font-size:15px}
+    .hero-meta{gap:14px}
+    .trustbar{grid-template-columns:1fr 1fr;gap:14px}
+    .trustitem{font-size:11px}.trusticon{width:31px;height:31px}
+    .section-title{font-size:43px}
+    .floating-note{width:185px;font-size:19px}
+    .pill-grid{grid-template-columns:1fr}
+    .programs{grid-template-columns:1fr}
+    .program:last-child{grid-column:auto}
+    .gallery{grid-template-columns:1fr;grid-auto-rows:230px}
+    .gallery .tile:first-child{grid-column:auto}
+    .footer-grid{grid-template-columns:1fr}
+    .modal-card{padding:28px}
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<header class="nav">
+  <a href="#" class="brand" aria-label="HAPPY Minds home"><img src="assets/logo-horizontal.svg" alt="HAPPY Minds — Learning for Life" /></a>
+  <nav class="navlinks">
+    <a href="#about">About</a>
+    <a href="#learning">Learning</a>
+    <a href="#life">Life at School</a>
+    <a href="#parents">Parents</a>
+    <a href="#admissions">Admissions</a>
+  </nav>
+  <button class="navcta" onclick="openModal()">Enquire Now</button>
+  <button class="menu" aria-label="Open menu" onclick="openMenu()">☰</button>
+</header>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-top"><img src="assets/logo-horizontal.svg" alt="HAPPY Minds" /><button onclick="closeMenu()" aria-label="Close menu">×</button></div>
+    <nav>
+      <a href="#about" onclick="closeMenu()">About <span>→</span></a>
+      <a href="#learning" onclick="closeMenu()">Learning <span>→</span></a>
+      <a href="#life" onclick="closeMenu()">Life at HAPPY Minds <span>→</span></a>
+      <a href="#parents" onclick="closeMenu()">Parents <span>→</span></a>
+      <a href="#admissions" onclick="closeMenu()">Admissions 2027 <span>→</span></a>
+    </nav>
+    <div class="mobile-menu-actions"><a href="tel:+919493294808">Call us</a><a href="https://wa.me/919493294808" target="_blank">WhatsApp</a></div>
+  </div>
+</div>
+
+<main>
+<section class="hero">
+  <div class="reveal">
+    <div class="eyebrow">A different beginning. A stronger future.</div>
+    <h1>HAPPY <em>Minds</em></h1>
+    <div class="hero-sub">Learning for Life</div>
+    <p class="hero-copy">Building smarter, stronger, happier kids through strong foundations, thoughtful teaching and a childhood worth remembering.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#about">Discover HAPPY Minds <span>→</span></a>
+      <button class="btn" onclick="openModal()">Admissions 2027</button>
+    </div>
+    <div class="hero-meta">
+      <span><b>Yadagirigutta</b>Telangana</span>
+      <span><b>Play School – Class 5</b>Early years to primary</span>
+      <span><b>SSC | Classes 1–5</b>State curriculum</span>
+    </div>
+  </div>
+  <div class="hero-media reveal delay-2">
+    <img class="hero-image" src="assets/hero.jpg" alt="Happy child learning" />
+    <div class="scribble">Curious.<br>Confident.<br>Kind.<br>Future-ready.</div>
+  </div>
+  <div class="scroll-cue"><i></i> Scroll to discover</div>
+</section>
+
+<div class="trustbar reveal">
+  <div class="trustitem"><div class="trusticon">⌖</div><div><strong>Yadagirigutta</strong>Our home</div></div>
+  <div class="trustitem"><div class="trusticon">✦</div><div><strong>Play School – Class 5</strong>Growing together</div></div>
+  <div class="trustitem"><div class="trusticon">◈</div><div><strong>SSC | Classes 1–5</strong>Strong foundations</div></div>
+  <div class="trustitem"><div class="trusticon">○</div><div><strong>Opening 2027</strong>Be part of the beginning</div></div>
+</div>
+
+<section id="about">
+  <div class="split">
+    <div class="reveal">
+      <div class="section-eyebrow">Our philosophy</div>
+      <h2 class="section-title">What if school was about more than marks?</h2>
+      <p class="body-lg">At HAPPY Minds, we believe education is not only about what children know. It is about who they become — confident, curious, kind, capable and ready for life.</p>
+      <a class="link" href="#learning">Explore our philosophy →</a>
+    </div>
+    <div class="philosophy-media reveal delay-1">
+      <img src="assets/philosophy.jpg" alt="Child exploring and learning" />
+      <div class="floating-note"><small>A better way to grow</small>Strong foundations for a brighter tomorrow.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cream-band" id="parents">
+  <div class="reveal">
+    <div class="section-eyebrow">A school where your child feels</div>
+    <h2 class="section-title">Safe. Seen. Supported.</h2>
+  </div>
+  <div class="three">
+    <article class="quiet-card reveal"><div class="quiet-icon">♡</div><h3>Safe</h3><p>A thoughtfully designed environment where children can learn, play and grow with confidence.</p></article>
+    <article class="quiet-card reveal delay-1"><div class="quiet-icon">◌</div><h3>Seen</h3><p>Teachers who know each child as an individual, not just a name on a roll.</p></article>
+    <article class="quiet-card reveal delay-2"><div class="quiet-icon">✦</div><h3>Supported</h3><p>A caring environment where children can ask, explore, make mistakes and grow.</p></article>
+  </div>
+</section>
+
+<section id="learning">
+  <div class="academics">
+    <div class="photo-stack reveal">
+      <img src="assets/classroom.jpg" alt="Students learning in a classroom" />
+      <img src="assets/child.jpg" alt="Child learning through play" />
+    </div>
+    <div class="reveal delay-1">
+      <div class="section-eyebrow">Strong foundations</div>
+      <h2 class="section-title">Strong academics. Stronger life skills.</h2>
+      <p class="body-lg">We follow the SSC curriculum for Classes 1–5 with a child-centred approach — building strong foundations in language, mathematics, science and the world around us.</p>
+      <div class="pill-grid">
+        <div class="pill"><b>English & Communication</b>Express clearly and confidently.</div>
+        <div class="pill"><b>Mathematics</b>Build thinking, logic and problem-solving.</div>
+        <div class="pill"><b>Science & Exploration</b>Ask questions. Discover why.</div>
+        <div class="pill"><b>Languages & Environment</b>Connect with the world around us.</div>
+      </div>
+      <a class="link" href="#wheel">How we teach →</a>
+    </div>
+  </div>
+</section>
+
+<section class="wheel" id="wheel">
+  <div class="wheel-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">The HAPPY Minds Learning Wheel™</div>
+      <h2>8 things we intentionally develop.</h2>
+      <p class="wheel-copy">Because a child is more than a report card. Our approach brings academics, communication, character, creativity, curiosity, confidence, wellbeing and future readiness together.</p>
+      <a class="link" style="color:var(--gold-soft)" href="#programmes">Explore the Learning Wheel →</a>
+    </div>
+    <div class="wheel-items reveal delay-1">
+      <div class="wheel-item"><div class="dot">✦</div><b>Academics</b></div>
+      <div class="wheel-item"><div class="dot">◌</div><b>Communication</b></div>
+      <div class="wheel-item"><div class="dot">♡</div><b>Character</b></div>
+      <div class="wheel-item"><div class="dot">✧</div><b>Creativity</b></div>
+      <div class="wheel-item"><div class="dot">⌕</div><b>Curiosity</b></div>
+      <div class="wheel-item"><div class="dot">☆</div><b>Confidence</b></div>
+      <div class="wheel-item"><div class="dot">♥</div><b>Wellbeing</b></div>
+      <div class="wheel-item"><div class="dot">↗</div><b>Future Readiness</b></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="day">
+    <div class="reveal">
+      <div class="section-eyebrow">A day at HAPPY Minds</div>
+      <h2 class="section-title">A day filled with learning, exploration and joy.</h2>
+      <p class="body-lg">A balanced school day gives children space to learn deeply, move freely, create, connect and reflect.</p>
+    </div>
+    <div class="day-list reveal delay-1">
+      <div class="day-row"><time>ARRIVE</time><div><b>Welcome & settle in</b><span>A warm start to the day.</span></div></div>
+      <div class="day-row"><time>LEARN</time><div><b>Foundations & classroom learning</b><span>Focused time for core academics.</span></div></div>
+      <div class="day-row"><time>EXPLORE</time><div><b>Hands-on discovery</b><span>Questions become experiments and experiences.</span></div></div>
+      <div class="day-row"><time>CREATE</time><div><b>Art, music & expression</b><span>Space to make, imagine and communicate.</span></div></div>
+      <div class="day-row"><time>MOVE</time><div><b>Play & physical activity</b><span>Healthy bodies support healthy minds.</span></div></div>
+      <div class="day-row"><time>CONNECT</time><div><b>Friends, community & reflection</b><span>Learning to listen, share and grow together.</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cream-band" id="programmes">
+  <div class="programs-head reveal">
+    <div><div class="section-eyebrow">From Play School to Class 5</div><h2 class="section-title">Little beginnings. Big possibilities.</h2></div>
+    <a class="link" href="#admissions">View all programmes →</a>
+  </div>
+  <div class="programs">
+    <article class="program reveal"><img src="assets/child.jpg" alt="Play School" /><div class="program-body"><h3>Play School</h3><p>2.5 – 3.5 years</p><b>Explore</b></div></article>
+    <article class="program reveal delay-1"><img src="assets/teacher.jpg" alt="Nursery" /><div class="program-body"><h3>Nursery</h3><p>3.5 – 4.5 years</p><b>Discover</b></div></article>
+    <article class="program reveal delay-2"><img src="assets/earlyyears.jpg" alt="Early years" /><div class="program-body"><h3>LKG & UKG</h3><p>Early years</p><b>Build</b></div></article>
+    <article class="program reveal"><img src="assets/primary.jpg" alt="Primary classroom" /><div class="program-body"><h3>Classes 1–2</h3><p>SSC Curriculum</p><b>Grow</b></div></article>
+    <article class="program reveal delay-1"><img src="assets/students.jpg" alt="Students learning" /><div class="program-body"><h3>Classes 3–5</h3><p>SSC Curriculum</p><b>Lead</b></div></article>
+  </div>
+</section>
+
+<section class="life" id="life">
+  <div class="reveal">
+    <div class="section-eyebrow">Life at HAPPY Minds</div>
+    <h2 class="section-title">Real spaces. Real experiences. Real growth.</h2>
+  </div>
+  <div class="gallery">
+    <div class="tile reveal"><img src="assets/classroom.jpg" alt="Classrooms" /><span class="caption">Classrooms</span></div>
+    <div class="tile reveal delay-1"><img src="assets/playarea.jpg" alt="Play" /><span class="caption">Play & movement</span></div>
+    <div class="tile reveal delay-2"><img src="assets/library.jpg" alt="Library" /><span class="caption">Reading</span></div>
+    <div class="tile reveal"><img src="assets/activity.jpg" alt="Activities" /><span class="caption">Activities</span></div>
+    <div class="tile reveal delay-1"><img src="assets/campus2.jpg" alt="Campus" /><span class="caption">Campus</span></div>
+  </div>
+</section>
+
+<section>
+  <div class="founder">
+    <div class="reveal"><img src="assets/teacher.jpg" alt="Educator with children" /></div>
+    <div class="reveal delay-1">
+      <div class="section-eyebrow">The people behind HAPPY Minds</div>
+      <h2 class="section-title">A passionate team. A shared purpose.</h2>
+      <p class="founder-quote">“We are building a school where children can learn deeply, grow confidently and still enjoy being children.”</p>
+      <p class="body-lg">HAPPY Minds is an initiative of the Happy Minds Child Development Society — created with a simple belief that a better future begins with a better childhood.</p>
+      <a class="link" href="#admissions">Our story →</a>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="admissions">
+  <div class="cta-content reveal">
+    <div class="section-eyebrow" style="color:var(--gold-soft)">Opening in Yadagirigutta — 2027</div>
+    <h2>Be part of the beginning.</h2>
+    <p>Join the HAPPY Minds parent community, follow our journey and be the first to know when admissions open.</p>
+    <div class="actions">
+      <button class="btn btn-primary" onclick="openModal()">Join Parent Community →</button>
+      <button class="btn" onclick="openModal()">Book a Campus Visit</button>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a class="brand" href="#"><img src="assets/logo-horizontal.svg" alt="HAPPY Minds — Learning for Life" /></a>
+      <p style="max-width:310px;margin-top:20px">Building smarter, stronger, happier kids through learning for life.</p>
+    </div>
+    <div><h4>Explore</h4><a href="#about">Our Story</a><br><a href="#learning">Our Approach</a><br><a href="#wheel">Learning Wheel</a></div>
+    <div><h4>Parents</h4><a href="#parents">Why HAPPY Minds</a><br><a href="#admissions">Admissions 2027</a><br><a href="#admissions">FAQs</a></div>
+    <div><h4>Visit</h4><p>Yadagirigutta<br>Telangana, India</p><button class="btn btn-primary" onclick="openModal()">Talk to us →</button></div>
+  </div>
+  <div class="copyright"><span>© 2026 HAPPY Minds. All rights reserved.</span><span>Managed by Happy Minds Child Development Society · Yadagirigutta</span></div>
+</footer>
+
+<div class="mobile-bar">
+  <a href="tel:+919493294808">Call</a>
+  <a href="https://wa.me/919493294808" target="_blank">WhatsApp</a>
+  <button onclick="openModal()">Enquire</button>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <button class="close" onclick="closeModal()" aria-label="Close">×</button>
+    <div class="section-eyebrow">HAPPY Minds · 2027</div>
+    <h2 id="modalTitle">Let's start a conversation.</h2>
+    <p class="body-lg">Tell us a little about your child and we'll get back to you.</p>
+    <form class="form" onsubmit="submitDemo(event)">
+      <input required placeholder="Parent name" />
+      <input required type="tel" placeholder="Phone number" />
+      <input placeholder="Child name" />
+      <select required><option value="">Class interested in</option><option>Play School</option><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Classes 2–5</option></select>
+      <button class="btn btn-primary" type="submit">Send Enquiry →</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    progress.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, {threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  const modal = document.getElementById('modal');
+  function openModal(){ modal.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+  modal.addEventListener('click', e => { if(e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+
+  const mobileMenu = document.getElementById('mobileMenu');
+  function openMenu(){ mobileMenu.classList.add('open'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeMenu(){ mobileMenu.classList.remove('open'); mobileMenu.setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+  mobileMenu.addEventListener('click', e => { if(e.target === mobileMenu) closeMenu(); });
+
+  function submitDemo(e){
+    e.preventDefault();
+    e.target.innerHTML = '<div style="padding:18px 0;text-align:center"><strong style="font-family:Playfair Display;font-size:28px">Thank you.</strong><p style="color:#687386">Your enquiry has been received. We’ll be in touch soon.</p></div>';
+  }
+</script>
+</body>
+</html>
