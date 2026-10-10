@@ -81,9 +81,14 @@
   .btn span{display:inline-block;transition:transform .3s ease}
   .btn:hover{transform:translateY(-3px);box-shadow:0 12px 25px rgba(15,23,42,.12)}
   .btn:hover span{transform:translateX(4px)}
-  .meta-icon{display:inline-grid;place-items:center;width:24px;height:24px;margin-right:8px;border-radius:50%;background:#f3e7cf;color:var(--gold);font-size:15px;line-height:1;vertical-align:middle}
-  .hero-meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;color:#667085;font-size:12px}
-  .hero-meta b{color:var(--navy);display:block;margin-bottom:2px}
+  .hero-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:34px;color:#667085;font-size:14px}
+  .meta-item{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:start;gap:12px;min-width:0}
+  .meta-icon{width:48px;height:48px;display:grid;place-items:center;flex:none;border-radius:50%;background:#f3e7cf;color:var(--gold)}
+  .meta-icon svg{display:block;width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .meta-copy{min-width:0;padding-top:1px}
+  .hero-meta b{color:var(--navy);display:block;margin:0 0 5px;font-size:15px;line-height:1.35}
+  .meta-copy span{display:block;line-height:1.5}
+  @media(max-width:640px){.hero-meta{grid-template-columns:1fr;gap:16px}.meta-item{grid-template-columns:40px minmax(0,1fr);gap:11px}.meta-icon{width:40px;height:40px}.hero-meta b{font-size:14px}.meta-copy span{font-size:12px}}
   .hero-media{position:relative;z-index:1;overflow:hidden;border-radius:46% 46% 20px 20px;box-shadow:var(--shadow)}
   .hero-image{height:min(660px,72vh);min-height:540px;width:100%;object-fit:cover;object-position:center 18%;border-radius:inherit;will-change:transform}
   .scribble{position:absolute;right:22px;bottom:48px;font-family:"Playfair Display",serif;font-style:italic;color:var(--navy);font-size:22px;line-height:1.1;transform:rotate(-5deg);text-shadow:0 8px 22px rgba(255,253,249,.95)}
@@ -384,8 +389,14 @@
       <button class="btn" type="button" onclick="openModal()">Admissions 2027</button>
     </div>
     <div class="hero-meta">
-      <span><b><span class="meta-icon" aria-hidden="true">⌖</span>Yadagirigutta</b>Yadadri Bhuvanagiri, Telangana</span>
-      <span><b><span class="meta-icon" aria-hidden="true">✦</span>Play School to Class 5</b>From early years through primary school</span>
+      <div class="meta-item">
+        <span class="meta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+        <div class="meta-copy"><b>Yadagirigutta</b><span>Yadadri Bhuvanagiri, Telangana</span></div>
+      </div>
+      <div class="meta-item">
+        <span class="meta-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m2 9 10-5 10 5-10 5L2 9Z"/><path d="M6 11v5c3.5 2.5 8.5 2.5 12 0v-5"/><path d="M22 9v6"/></svg></span>
+        <div class="meta-copy"><b>Play School to Class 5</b><span>From early years through primary school</span></div>
+      </div>
     </div>
   </div>
   <div class="hero-media reveal delay-2">
