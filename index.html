@@ -573,11 +573,11 @@
     <h2 id="modalTitle">Let's start a conversation.</h2>
     <p class="body-lg">Tell us a little about your child and we'll get back to you.</p>
     <form class="form" onsubmit="submitDemo(event)">
-      <label>Your name<input required name="parent" autocomplete="name" placeholder="Enter your full name" /></label>
-      <label>Your phone number<input required type="tel" name="phone" autocomplete="tel" placeholder="Enter your phone number" /></label>
-      <label>Child name (optional)<input name="child" autocomplete="off" placeholder="Enter your child’s name" /></label>
-      <label>Which class are you interested in?
-        <select required name="class"><option value="">Choose a class</option><option>Play School</option><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Classes 2–5</option></select>
+      <label>Parent name<input required name="parent" autocomplete="name" /></label>
+      <label>Phone number<input required type="tel" name="phone" autocomplete="tel" /></label>
+      <label>Child name<input name="child" /></label>
+      <label>Class interested in
+        <select required name="class"><option value="">Class interested in</option><option>Play School</option><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Classes 2–5</option></select>
       </label>
       <button class="btn btn-primary" type="submit">Send Enquiry →</button>
     </form>
@@ -671,8 +671,13 @@
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
-    const data = new FormData(form);
+    const formValues = new FormData(form);
+    const data = new FormData();
     data.append('_subject', 'New parent enquiry | HAPPY Minds');
+    data.append('Parent name', formValues.get('parent') || '');
+    data.append('Phone number', formValues.get('phone') || '');
+    data.append('Child name', formValues.get('child') || '');
+    data.append('Class interested in', formValues.get('class') || '');
     submitButton.disabled = true;
     submitButton.textContent = 'Sending…';
     try {
