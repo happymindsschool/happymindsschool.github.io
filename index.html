@@ -206,9 +206,9 @@
   .reveal.visible{opacity:1;transform:none}
   .delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}.delay-3{transition-delay:.24s}
 
-  .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);backdrop-filter:blur(8px);display:none;place-items:center;z-index:500;padding:20px}
+  .modal{position:fixed;inset:0;background:rgba(15,23,42,.62);backdrop-filter:blur(8px);display:none;place-items:center;z-index:500;padding:20px;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .modal.open{display:grid}
-  .modal-card{background:var(--cream);max-width:520px;width:100%;padding:38px;border-radius:30px;box-shadow:0 30px 100px rgba(0,0,0,.25);position:relative}
+  .modal-card{background:var(--cream);max-width:520px;width:100%;max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);overflow-y:auto;-webkit-overflow-scrolling:touch;padding:38px;border-radius:30px;box-shadow:0 30px 100px rgba(0,0,0,.25);position:relative}
   .modal-card h2{font-size:42px}
   .close{position:absolute;right:20px;top:20px;border:0;background:#eee7db;border-radius:50%;width:44px;height:44px;cursor:pointer}
   .form{display:grid;gap:12px;margin-top:24px}
@@ -307,7 +307,8 @@
     .floating-note{width:185px;font-size:19px}
     .pill-grid{grid-template-columns:1fr}
     .footer-grid{grid-template-columns:1fr}
-    .modal-card{padding:28px}
+    .modal{place-items:start center;padding:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+    .modal-card{padding:28px 22px;border-radius:24px;max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px)}
   }
 </style>
 </head>
@@ -349,7 +350,7 @@
     <p class="hero-copy">Building smarter, stronger, happier kids through strong foundations, thoughtful teaching and a childhood worth remembering.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#about">Discover HAPPY Minds <span>→</span></a>
-      <button class="btn" onclick="openModal()">Admissions 2027</button>
+      <button class="btn" type="button" onclick="openModal()">Admissions 2027</button>
     </div>
     <div class="hero-meta">
       <span><b>Yadagirigutta</b>Yadadri Bhuvanagiri</span>
@@ -589,14 +590,17 @@
   function modalFields(){ return [...modal.querySelectorAll('button, input, select, a')].filter(el => !el.disabled); }
   function openModal(){
     lastFocus = document.activeElement;
+    closeMenu();
     modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
     const first = modal.querySelector('input, select');
-    if(first) first.focus();
+    if(first) window.setTimeout(() => first.focus({preventScroll:true}), 80);
   }
   function closeModal(){
     if(!modal.classList.contains('open')) return;
     modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
     if(!mobileMenu.classList.contains('open')) document.body.style.overflow = '';
     if(lastFocus) lastFocus.focus();
   }
@@ -614,6 +618,18 @@
   function openMenu(){ mobileMenu.classList.add('open'); mobileMenu.removeAttribute('inert'); mobileMenu.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden'; }
   function closeMenu(){ mobileMenu.classList.remove('open'); mobileMenu.setAttribute('inert',''); mobileMenu.setAttribute('aria-hidden','true'); if(!modal.classList.contains('open')) document.body.style.overflow = ''; }
   mobileMenu.addEventListener('click', e => { if(e.target === mobileMenu) closeMenu(); });
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const selector = link.getAttribute('href');
+      if(!selector || selector === '#') { window.scrollTo({top:0, behavior:reduceMotion ? 'auto' : 'smooth'}); return; }
+      const target = document.querySelector(selector);
+      if(!target) return;
+      e.preventDefault();
+      if(mobileMenu.classList.contains('open')) closeMenu();
+      target.scrollIntoView({behavior:reduceMotion ? 'auto' : 'smooth', block:'start'});
+      if(history.replaceState) history.replaceState(null, '', selector);
+    });
+  });
   document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeModal(); closeMenu(); } });
 
   function submitDemo(e){
