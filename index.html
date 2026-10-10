@@ -220,8 +220,10 @@
   .close{position:absolute;right:20px;top:20px;border:0;background:#eee7db;border-radius:50%;width:44px;height:44px;cursor:pointer}
   .form{display:grid;gap:12px;margin-top:24px}
   .form label{display:grid;gap:6px;font-size:12px;font-weight:600;color:var(--navy)}
-  .form input,.form select{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:white;font-family:"DM Sans",sans-serif;font-size:16px;font-weight:500;line-height:1.4;outline:none}
-  .form input:focus,.form select:focus{border-color:var(--gold)}
+  .form input,.form select,.form textarea{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:white;font-family:"DM Sans",sans-serif;font-size:16px;font-weight:500;line-height:1.4;outline:none}
+  .form textarea{resize:vertical;min-height:96px}
+  .form input:focus,.form select:focus,.form textarea:focus{border-color:var(--gold)}
+  .form [hidden]{display:none!important}
 
   @media(max-width:900px){
     .nav{top:10px;width:calc(100% - 20px);height:60px}
@@ -359,7 +361,7 @@
     <a href="#life">Life at School</a>
     <a href="#admissions">Admissions</a>
   </nav>
-  <button class="navcta" onclick="openModal()">Enquire Now</button>
+  <button class="navcta" onclick="openModal('general')">Enquire Now</button>
   <button class="menu" aria-label="Open menu" onclick="openMenu()">☰</button>
 </header>
 
@@ -386,7 +388,7 @@
     <p class="hero-copy">Building smarter, stronger, happier kids through strong foundations, thoughtful teaching and a childhood worth remembering.</p>
     <div class="actions">
       <a class="btn btn-primary" href="#about">Discover HAPPY Minds <span>→</span></a>
-      <button class="btn" type="button" onclick="openModal()">Admissions 2027</button>
+      <button class="btn" type="button" onclick="openModal('admissions')">Admissions 2027</button>
     </div>
     <div class="hero-meta">
       <div class="meta-item">
@@ -540,8 +542,8 @@
     <h2>Be part of the beginning.</h2>
     <p>Join the HAPPY Minds parent community, follow our journey and be the first to know when admissions open.</p>
     <div class="actions">
-      <button class="btn btn-primary" onclick="openModal()">Join Parent Community →</button>
-      <button class="btn" onclick="openModal()">Book a Campus Visit</button>
+      <button class="btn btn-primary" onclick="openModal('parent-community')">Join Parent Community →</button>
+      <button class="btn" onclick="openModal('campus-visit')">Book a Campus Visit</button>
     </div>
   </div>
 </section>
@@ -555,7 +557,7 @@
     </div>
     <div class="footer-links"><h4>Explore</h4><a href="#story">Our Story</a><a href="#learning">Our Approach</a><a href="#wheel">Learning Wheel</a></div>
     <div class="footer-links"><h4>Parents</h4><a href="#parents">Why HAPPY Minds</a><a href="#admissions">Admissions 2027</a></div>
-    <div><h4>Visit</h4><p>Yadagirigutta<br>Yadadri Bhuvanagiri District<br>Telangana 508115</p><p><a href="tel:+919493294808">+91 94932 94808</a><br><a href="mailto:happymindsschool.ygt@gmail.com">happymindsschool.ygt@gmail.com</a></p><button class="btn btn-primary" onclick="openModal()">Talk to us →</button></div>
+    <div><h4>Visit</h4><p>Yadagirigutta<br>Yadadri Bhuvanagiri District<br>Telangana 508115</p><p><a href="tel:+919493294808">+91 94932 94808</a><br><a href="mailto:happymindsschool.ygt@gmail.com">happymindsschool.ygt@gmail.com</a></p><button class="btn btn-primary" onclick="openModal('general')">Talk to us →</button></div>
   </div>
   <div class="copyright"><span>© 2026 HAPPY Minds. All rights reserved.</span><span>Managed by Happy Minds Child Development Society · Yadagirigutta</span></div>
 </footer>
@@ -563,22 +565,24 @@
 <div class="mobile-bar">
   <a href="tel:+919493294808">Call</a>
   <a href="https://wa.me/919493294808" target="_blank" rel="noopener">WhatsApp</a>
-  <button onclick="openModal()">Enquire</button>
+  <button onclick="openModal('general')">Enquire</button>
 </div>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal-card">
     <button class="close" onclick="closeModal()" aria-label="Close">×</button>
-    <div class="section-eyebrow">HAPPY Minds · 2027</div>
+    <div class="section-eyebrow" id="modalEyebrow">HAPPY Minds · 2027</div>
     <h2 id="modalTitle">Let's start a conversation.</h2>
-    <p class="body-lg">Tell us a little about your child and we'll get back to you.</p>
-    <form class="form" onsubmit="submitDemo(event)">
-      <label>Parent name<input required name="parent" autocomplete="name" /></label>
-      <label>Phone number<input required type="tel" name="phone" autocomplete="tel" /></label>
-      <label>Child name<input name="child" /></label>
-      <label>Class interested in
-        <select required name="class"><option value="">Class interested in</option><option>Play School</option><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Classes 2–5</option></select>
+    <p class="body-lg" id="modalDescription">Tell us a little about your child and we'll get back to you.</p>
+    <form class="form" id="enquiryForm" onsubmit="submitEnquiry(event)">
+      <label data-field="parent">Parent name<input required name="parent" autocomplete="name" /></label>
+      <label data-field="phone">Phone number<input required type="tel" name="phone" autocomplete="tel" /></label>
+      <label data-field="child">Child name<input name="child" /></label>
+      <label data-field="class">Class interested in
+        <select name="class"><option value="">Class interested in</option><option>Play School</option><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Classes 2–5</option></select>
       </label>
+      <label data-field="visit-date">Preferred visit date (optional)<input type="date" name="visit_date" /></label>
+      <label data-field="message">Your message (optional)<textarea name="message" rows="3" placeholder="How can we help?"></textarea></label>
       <button class="btn btn-primary" type="submit">Send Enquiry →</button>
     </form>
   </div>
@@ -621,14 +625,38 @@
 
   const modal = document.getElementById('modal');
   let lastFocus = null;
-  function modalFields(){ return [...modal.querySelectorAll('button, input, select, a')].filter(el => !el.disabled); }
-  function openModal(){
+  function modalFields(){ return [...modal.querySelectorAll('button, input, select, textarea, a')].filter(el => !el.disabled && !el.closest('[hidden]')); }
+  const enquiryForm = document.getElementById('enquiryForm');
+  const originalFormMarkup = enquiryForm.innerHTML;
+  const enquiryModes = {
+    general: {title:"Let's start a conversation.", description:"Have a question about HAPPY Minds? Send us a message and our team will get back to you.", subject:"General enquiry | HAPPY Minds", fields:['parent','phone','message'], required:['parent','phone'], button:'Send Enquiry →'},
+    admissions: {title:"Admissions 2027", description:"Tell us about your child and the class you are interested in. Our team will contact you about admissions.", subject:"Admissions enquiry | HAPPY Minds", fields:['parent','phone','child','class'], required:['parent','phone','class'], button:'Enquire About Admissions →'},
+    'campus-visit': {title:"Book a Campus Visit", description:"Share your contact details and preferred visit date. We’ll get in touch to coordinate your visit.", subject:"Campus visit request | HAPPY Minds", fields:['parent','phone','visit-date','class'], required:['parent','phone'], button:'Request a Campus Visit →'},
+    'parent-community': {title:"Join the Parent Community", description:"Leave your details to hear about HAPPY Minds updates and the admissions journey.", subject:"Parent community interest | HAPPY Minds", fields:['parent','phone','child'], required:['parent','phone'], button:'Join Parent Community →'}
+  };
+  let currentEnquiryType = 'general';
+  function openModal(type='general'){
     lastFocus = document.activeElement;
     closeMenu();
+    if(enquiryForm.querySelector('[role="status"]')) enquiryForm.innerHTML = originalFormMarkup;
+    currentEnquiryType = enquiryModes[type] ? type : 'general';
+    const config = enquiryModes[currentEnquiryType];
+    document.getElementById('modalTitle').textContent = config.title;
+    document.getElementById('modalDescription').textContent = config.description;
+    document.getElementById('modalEyebrow').textContent = currentEnquiryType === 'admissions' ? 'HAPPY Minds · Admissions 2027' : 'HAPPY Minds · 2027';
+    enquiryForm.querySelectorAll('[data-field]').forEach(field => {
+      const visible = config.fields.includes(field.dataset.field);
+      field.hidden = !visible;
+      const control = field.querySelector('input,select,textarea');
+      if(control) control.required = visible && config.required.includes(field.dataset.field);
+    });
+    enquiryForm.querySelector('button[type="submit"]').textContent = config.button;
+    const visitDate = enquiryForm.querySelector('[name="visit_date"]');
+    if(visitDate) visitDate.min = new Date().toLocaleDateString('en-CA');
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    const first = modal.querySelector('input, select');
+    const first = enquiryForm.querySelector('[data-field="parent"] input');
     if(first) window.setTimeout(() => first.focus({preventScroll:true}), 80);
   }
   function closeModal(){
@@ -666,18 +694,22 @@
   });
   document.addEventListener('keydown', e => { if(e.key === 'Escape'){ closeModal(); closeMenu(); } });
 
-  async function submitDemo(e){
+  async function submitEnquiry(e){
     e.preventDefault();
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
-    const formValues = new FormData(form);
+    const values = new FormData(form);
+    const config = enquiryModes[currentEnquiryType] || enquiryModes.general;
     const data = new FormData();
-    data.append('_subject', 'New parent enquiry | HAPPY Minds');
-    data.append('Parent name', formValues.get('parent') || '');
-    data.append('Phone number', formValues.get('phone') || '');
-    data.append('Child name', formValues.get('child') || '');
-    data.append('Class interested in', formValues.get('class') || '');
+    data.append('_subject', config.subject);
+    data.append('Enquiry type', currentEnquiryType);
+    data.append('Parent name', values.get('parent') || '');
+    data.append('Phone number', values.get('phone') || '');
+    if(config.fields.includes('child')) data.append('Child name', values.get('child') || '');
+    if(config.fields.includes('class')) data.append('Class interested in', values.get('class') || '');
+    if(config.fields.includes('visit-date')) data.append('Preferred visit date', values.get('visit_date') || '');
+    if(config.fields.includes('message')) data.append('Message', values.get('message') || '');
     submitButton.disabled = true;
     submitButton.textContent = 'Sending…';
     try {
