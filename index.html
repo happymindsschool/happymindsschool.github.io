@@ -68,6 +68,7 @@
 
   .hero{min-height:100vh;padding:150px 6vw 0;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:40px;position:relative;overflow:hidden}
   .hero:before{content:"";position:absolute;width:650px;height:650px;border-radius:50%;background:rgba(217,119,6,.07);filter:blur(3px);right:-240px;top:120px}
+  .hero:before { pointer-events: none; }
   .eyebrow,.section-eyebrow{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
   h1,h2,h3{font-family:"Playfair Display",serif;font-weight:600;line-height:1.03;letter-spacing:-.035em;margin:0}
   h1{font-size:clamp(58px,7.4vw,104px);max-width:720px}
