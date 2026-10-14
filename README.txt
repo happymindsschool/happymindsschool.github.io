@@ -1,25 +1,22 @@
-HAPPY Minds — Website V3
+HAPPY Minds School — Official Website
 
-This is a visual/UX prototype for the HAPPY Minds school website.
+Website: https://happymindsschool.in/
+Hosting: GitHub Pages, custom domain via CNAME.
 
-Open index.html in a browser.
+Pages:
+- index.html — homepage, gallery, philosophy, learning overview and enquiry modal
+- admissions.html — admissions information, FAQs and contact options
+- learning.html — programmes and learning approach
+- sitemap.xml / robots.txt — search discovery
 
-Assets:
-- assets/logo-horizontal.png — approved horizontal logo, transparent background
-- assets/logo-horizontal-light.png — same logo recolored for the navy footer
-- assets/logo-stacked.png — stacked logo
-- assets/favicon.png — crest only
-- assets/brand/ — source logo, uniform board, and campus gate
-- assets/campus-gate.jpg, campus2.jpg, cta-campus.jpg — the supplied school building
-- Other JPG images — generated photographs matched to the navy-and-beige uniform and the campus. Replace with real photography before production.
+Assets are in assets/. Most classroom and student photographs are illustrative or generated. Do not describe them as actual campus or enrolled students. Replace illustrative photos with real, consent-cleared photographs as available. The founders photo and campus assets should be reviewed for appropriate attribution and accuracy.
 
-The site includes:
-- responsive desktop + mobile layout
-- mobile slide-out navigation
-- sticky mobile Call / WhatsApp / Enquire bar
-- smooth reveal animations
-- enquiry modal
-- parent-first content hierarchy
-- local bundled assets
+Enquiry forms on the homepage use Formspree endpoint configured in index.html. Verify actual delivery to the school inbox before marketing. Dedicated pages provide phone, email and WhatsApp contact options.
 
-Phone in prototype: +91 94932 94808
+Do not publish unconfirmed fees, admission cut-off dates, government approvals, teacher credentials or completed facilities.
+
+School: HAPPY Minds School
+Management: Happy Minds Child Development Society
+Location: Yadagirigutta, Yadadri Bhuvanagiri, Telangana
+Phone: +91 94932 94808
+Email: happymindsschool.ygt@gmail.com
