@@ -166,6 +166,13 @@
   .program b{color:var(--gold);font-size:12px}
 
   .life{padding-bottom:40px}
+  .campus-progress{background:#f7f1e6}
+  .campus-progress-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:55px}
+  .campus-progress-note{background:#fffdf9;border:1px solid #e9dece;padding:40px;border-radius:30px}
+  .campus-progress-note h3{font-family:"Playfair Display",serif;font-size:29px;color:var(--navy);line-height:1.25;margin:16px 0}
+  .campus-progress-note p{color:#5d6675;line-height:1.8}
+  .campus-progress-state{display:inline-block;margin-top:14px;border-radius:999px;background:#f5e8d1;padding:9px 15px;font-size:12px;color:#684b24}
+  @media(max-width:800px){.campus-progress-inner{grid-template-columns:1fr;gap:24px}.campus-progress-note{padding:26px}}
   .gallery{display:grid;grid-template-columns:1.2fr .8fr .8fr;grid-auto-rows:240px;gap:14px;margin-top:44px}
   .gallery .tile{overflow:hidden;border-radius:26px;position:relative}
   .gallery .tile:first-child{grid-row:span 2}
@@ -458,7 +465,7 @@
         <div class="pill"><b>Science & Exploration</b>Ask questions. Discover why.</div>
         <div class="pill"><b>Languages & Environment</b>Connect with the world around us.</div>
       </div>
-      <a class="link" href="#wheel">How we teach →</a>
+      <a class="link" href="learning.html">How we teach →</a>
     </div>
   </div>
 </section>
@@ -468,7 +475,7 @@
     <div class="reveal">
       <div class="section-eyebrow">The HAPPY Minds Learning Wheel™</div>
       <h2>8 things we intentionally develop.</h2>
-      <p class="wheel-copy">Because a child is more than a report card. Our approach brings academics, communication, character, creativity, curiosity, confidence, wellbeing and future readiness together.</p>
+      <p class="wheel-copy">Because a child is more than a report card. Our Learning Wheel™ brings together eight areas of development: academics, communication, character, creativity, physical well-being, emotional intelligence, leadership and self-learning.</p>
       <a class="link" style="color:var(--gold-soft)" href="#day">A day at HAPPY Minds →</a>
     </div>
     <div class="wheel-items reveal delay-1">
@@ -476,10 +483,10 @@
       <div class="wheel-item"><div class="dot">◌</div><b>Communication</b></div>
       <div class="wheel-item"><div class="dot">♡</div><b>Character</b></div>
       <div class="wheel-item"><div class="dot">✧</div><b>Creativity</b></div>
-      <div class="wheel-item"><div class="dot">⌕</div><b>Curiosity</b></div>
-      <div class="wheel-item"><div class="dot">☆</div><b>Confidence</b></div>
-      <div class="wheel-item"><div class="dot">♥</div><b>Wellbeing</b></div>
-      <div class="wheel-item"><div class="dot">↗</div><b>Future Readiness</b></div>
+      <div class="wheel-item"><div class="dot">⌕</div><b>Physical Well-being</b></div>
+      <div class="wheel-item"><div class="dot">☆</div><b>Emotional Intelligence</b></div>
+      <div class="wheel-item"><div class="dot">♥</div><b>Leadership</b></div>
+      <div class="wheel-item"><div class="dot">↗</div><b>Self-Learning</b></div>
     </div>
   </div>
 </section>
@@ -510,7 +517,7 @@
   <div class="programs">
     <article class="program reveal"><img src="assets/child.jpg?v=2" loading="lazy" alt="Play School" /><div class="program-body"><h3>Play School</h3><p>2.5 – 3.5 years</p><b>Explore</b></div></article>
     <article class="program reveal delay-1"><img src="assets/philosophy.jpg?v=2" loading="lazy" alt="Nursery" /><div class="program-body"><h3>Nursery</h3><p>3.5 – 4.5 years</p><b>Discover</b></div></article>
-    <article class="program reveal delay-2"><img src="assets/earlyyears.jpg?v=2" loading="lazy" alt="Early years" /><div class="program-body"><h3>LKG & UKG</h3><p>Early years</p><b>Build</b></div></article>
+    <article class="program reveal delay-2"><img src="assets/earlyyears.jpg?v=2" loading="lazy" alt="Early years" /><div class="program-body"><h3>PP1 & PP2</h3><p>Pre-primary (LKG & UKG)</p><b>Build</b></div></article>
     <article class="program reveal"><img src="assets/primary.jpg?v=2" loading="lazy" alt="Primary classroom" /><div class="program-body"><h3>Classes 1–2</h3><p>SSC Curriculum</p><b>Grow</b></div></article>
     <article class="program reveal delay-1"><img src="assets/students.jpg?v=2" loading="lazy" alt="Students learning" /><div class="program-body"><h3>Classes 3–5</h3><p>SSC Curriculum</p><b>Lead</b></div></article>
   </div>
@@ -518,7 +525,7 @@
 
 <section class="life" id="life">
   <div class="reveal">
-    <div class="section-eyebrow">Life at HAPPY Minds</div>
+    <div class="section-eyebrow">Life at HAPPY Minds · Illustrative imagery</div>
     <h2 class="section-title">A world of little discoveries.</h2>
     <p class="body-lg">A glimpse of the learning spaces and experiences we’re thoughtfully preparing for children — from reading and creativity to play and connection.</p>
   </div>
@@ -528,6 +535,19 @@
     <div class="tile reveal delay-2"><img src="assets/library.jpg?v=2" loading="lazy" alt="Library" /><span class="caption">Reading</span></div>
     <div class="tile reveal"><img src="assets/activity.jpg?v=2" loading="lazy" alt="Activities" /><span class="caption">Activities</span></div>
     <div class="tile reveal delay-1"><img src="assets/campus2.jpg?v=2" loading="lazy" alt="Campus" /><span class="caption">Campus</span></div>
+  </div>
+</section>
+
+<section id="campus-progress" class="campus-progress">
+  <div class="campus-progress-inner">
+    <div class="reveal">
+      <div class="section-eyebrow">Preparing for 2027</div>
+      <h2 class="section-title">Our school is taking shape.</h2>
+      <p class="body-lg">We are preparing learning spaces for HAPPY Minds in Yadagirigutta. As work progresses, we will share real photographs and updates from the campus here.</p>
+      <p class="body-lg" style="font-size:14px">The images above illustrate the learning experiences we envision; they are not a photographic record of completed campus facilities.</p>
+      <a class="link" href="admissions.html">Ask about a campus visit →</a>
+    </div>
+    <div class="campus-progress-note reveal delay-1"><span class="section-eyebrow">Campus updates</span><h3>Real progress, shared as it happens.</h3><p>Classroom preparation, learning materials and outdoor spaces will be documented with actual campus photos when available.</p><span class="campus-progress-state">Preparing for opening in 2027</span></div>
   </div>
 </section>
 
@@ -588,7 +608,7 @@
       <label data-field="phone">Phone number<input required type="tel" name="phone" autocomplete="tel" /></label>
       <label data-field="child">Child name<input name="child" /></label>
       <label data-field="class">Class interested in
-        <select name="class"><option value="">Class interested in</option><option>Play School</option><option>Nursery</option><option>LKG</option><option>UKG</option><option>Class 1</option><option>Classes 2–5</option></select>
+        <select name="class"><option value="">Class interested in</option><option>Play School</option><option>Nursery</option><option>PP1 (LKG)</option><option>PP2 (UKG)</option><option>Class 1</option><option>Classes 2–5</option></select>
       </label>
       <label data-field="visit-date">Preferred visit date (optional)<input type="date" name="visit_date" /></label>
       <label data-field="message">Your message (optional)<textarea name="message" rows="3" placeholder="How can we help?"></textarea></label>
