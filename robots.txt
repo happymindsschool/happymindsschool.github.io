@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://happymindsschool.in/sitemap.xml
