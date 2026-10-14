@@ -220,6 +220,7 @@
 
   .reveal{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.8,.2,1)}
   .js .reveal{opacity:0;transform:translateY(28px)}
+  @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
   .reveal.visible,.js .reveal.visible{opacity:1;transform:none}
   .delay-1{transition-delay:.08s}.delay-2{transition-delay:.16s}.delay-3{transition-delay:.24s}
 
@@ -319,6 +320,7 @@
     .gallery .tile,.gallery .tile:first-child{min-width:0;height:auto;flex:initial;scroll-snap-align:none}
     .gallery .tile:first-child{grid-column:1/-1;grid-row:auto;height:240px}
     .gallery .caption{left:10px;bottom:10px;font-size:10px}
+    .programs .program:last-child img{height:180px}
     .founder{gap:32px}
     .founder img{height:auto;border-radius:26px}
     .founder-quote{font-size:26px}
@@ -548,7 +550,8 @@
     <h2>Be part of the beginning.</h2>
     <p>Join the HAPPY Minds parent community, follow our journey and be the first to know when admissions open.</p>
     <div class="actions">
-      <button class="btn btn-primary" onclick="openModal('parent-community')">Join Parent Community →</button>
+      <a class="btn btn-primary" href="admissions.html">Admissions Information →</a>
+      <button class="btn" onclick="openModal('parent-community')">Join Parent Community</button>
       <button class="btn" onclick="openModal('campus-visit')">Book a Campus Visit</button>
     </div>
   </div>
@@ -610,7 +613,8 @@
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
   }, {threshold:.12});
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  if(!reduceMotion) document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
 
   const sectionLinks = [...document.querySelectorAll('.navlinks a')];
   const sectionWatch = [
@@ -631,7 +635,7 @@
 
   const modal = document.getElementById('modal');
   let lastFocus = null;
-  function modalFields(){ return [...modal.querySelectorAll('button, input, select, textarea, a')].filter(el => !el.disabled && !el.closest('[hidden]')); }
+  function modalFields(){ return [...modal.querySelectorAll('button, input, select, textarea, a')].filter(el => !el.disabled && !el.closest('[hidden]') && el.getClientRects().length); }
   const enquiryForm = document.getElementById('enquiryForm');
   const originalFormMarkup = enquiryForm.innerHTML;
   const enquiryModes = {
@@ -642,7 +646,7 @@
   };
   let currentEnquiryType = 'general';
   function openModal(type='general'){
-    lastFocus = document.activeElement;
+    lastFocus = mobileMenu.classList.contains('open') ? menuButton : document.activeElement;
     closeMenu();
     if(enquiryForm.querySelector('[role="status"]')) enquiryForm.innerHTML = originalFormMarkup;
     enquiryForm.reset();
