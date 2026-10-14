@@ -35,7 +35,8 @@
   }
 
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:90px}
+  section[id]{scroll-margin-top:90px}
   body{margin:0;background:var(--cream);color:var(--ink);font-family:"DM Sans",sans-serif;line-height:1.6;overflow-x:hidden}
   a{color:inherit;text-decoration:none}
   button{font:inherit;background:transparent;color:inherit}
@@ -385,9 +386,9 @@
   <a href="#" class="brand" aria-label="HAPPY Minds home"><img src="assets/logo-horizontal.png?v=2" alt="HAPPY Minds — Learning for Life" /></a>
   <nav class="navlinks">
     <a href="#about">About</a>
-    <a href="learning.html">Learning</a>
+    <a href="#learning">Learning</a>
     <a href="#life">Life at School</a>
-    <a href="admissions.html">Admissions</a>
+    <a href="#admissions">Admissions</a>
   </nav>
   <button class="navcta" onclick="openModal('general')">Enquire Now</button>
   <button class="menu" aria-label="Open menu" onclick="openMenu()">☰</button>
@@ -398,9 +399,9 @@
     <div class="mobile-menu-top"><img src="assets/logo-horizontal.png?v=2" alt="HAPPY Minds" /><button onclick="closeMenu()" aria-label="Close menu">×</button></div>
     <nav>
       <a href="#about" onclick="closeMenu()">About <span>→</span></a>
-      <a href="learning.html">Learning <span>→</span></a>
+      <a href="#learning" onclick="closeMenu()">Learning <span>→</span></a>
       <a href="#life" onclick="closeMenu()">Life at HAPPY Minds <span>→</span></a>
-      <a href="admissions.html">Admissions 2027 <span>→</span></a>
+      <a href="#admissions" onclick="closeMenu()">Admissions 2027 <span>→</span></a>
     </nav>
     <div class="mobile-menu-actions"><a href="tel:+919493294808">Call us</a><a href="https://wa.me/919493294808" target="_blank" rel="noopener">WhatsApp</a></div>
   </div>
@@ -476,7 +477,7 @@
       <div class="section-eyebrow">The HAPPY Minds Learning Wheel™</div>
       <h2>8 things we intentionally develop.</h2>
       <p class="wheel-copy">Because a child is more than a report card. Our Learning Wheel™ brings together eight areas of development: academics, communication, character, creativity, physical well-being, emotional intelligence, leadership and self-learning.</p>
-      <a class="link" style="color:var(--gold-soft)" href="#day">A day at HAPPY Minds →</a>
+      <a class="link" style="color:var(--gold-soft)" href="learning.html">Explore our learning approach →</a>
     </div>
     <div class="wheel-items reveal delay-1">
       <div class="wheel-item"><div class="dot"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 7v14"/><path d="M3 18V5a1 1 0 0 1 1-1h3a5 5 0 0 1 5 5 5 5 0 0 1 5-5h3a1 1 0 0 1 1 1v13h-4a5 5 0 0 0-5 3 5 5 0 0 0-5-3z"/></svg></div><b>Academics</b></div>
@@ -718,7 +719,7 @@
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       const selector = link.getAttribute('href');
-      if(!selector || selector === '#') { window.scrollTo({top:0, behavior:reduceMotion ? 'auto' : 'smooth'}); return; }
+      if(!selector || selector === '#') { e.preventDefault(); if(mobileMenu.classList.contains('open')) closeMenu(); window.scrollTo({top:0, behavior:reduceMotion ? 'auto' : 'smooth'}); return; }
       const target = document.querySelector(selector);
       if(!target) return;
       e.preventDefault();
