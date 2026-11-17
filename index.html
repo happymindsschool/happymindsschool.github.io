@@ -242,7 +242,8 @@
   .form input,.form select,.form textarea{width:100%;padding:14px 15px;border:1px solid var(--line);border-radius:13px;background:white;font-family:"DM Sans",sans-serif;font-size:16px;font-weight:500;line-height:1.4;outline:none}
   .form textarea{resize:vertical;min-height:96px}
   .form input:focus,.form select:focus,.form textarea:focus{border-color:var(--gold)}
-  .form [hidden]{display:none!important}
+  .form [hidden],#enquiryForm[hidden],#googleEnquiryEmbed[hidden]{display:none!important}
+  .modal-card.google-form-mode{max-width:760px;padding:38px 12px 20px}
   .form input[aria-invalid="true"],.form select[aria-invalid="true"],.form textarea[aria-invalid="true"]{border-color:#b42318;background:#fff9f8}
   .field-error{margin:0;color:#b42318;font-size:12px;font-weight:500}
   .form-status{display:flex;align-items:flex-start;gap:14px;padding:24px 0}
@@ -640,6 +641,7 @@
     <div class="section-eyebrow" id="modalEyebrow">HAPPY Minds · 2027</div>
     <h2 id="modalTitle">Let's start a conversation.</h2>
     <p class="body-lg" id="modalDescription">Tell us a little about your child and we'll get back to you.</p>
+    <div id="googleEnquiryEmbed" hidden></div>
     <form class="form" id="enquiryForm" onsubmit="submitEnquiry(event)">
       <label data-field="parent">Parent name<input required name="parent" autocomplete="name" /></label>
       <label data-field="phone">Phone number<input required type="tel" name="phone" autocomplete="tel" /></label>
@@ -654,6 +656,7 @@
   </div>
 </div>
 
+<script src="assets/google-enquiries.js"></script>
 <script>
   const progress = document.getElementById('progress');
   const nav = document.querySelector('.nav');
@@ -692,7 +695,7 @@
 
   const modal = document.getElementById('modal');
   let lastFocus = null;
-  function modalFields(){ return [...modal.querySelectorAll('button, input, select, textarea, a')].filter(el => !el.disabled && !el.closest('[hidden]') && el.getClientRects().length); }
+  function modalFields(){ return [...modal.querySelectorAll('button, input, select, textarea, a, iframe')].filter(el => !el.disabled && !el.closest('[hidden]') && el.getClientRects().length); }
   const enquiryForm = document.getElementById('enquiryForm');
   const originalFormMarkup = enquiryForm.innerHTML;
   const enquiryModes = {
@@ -721,10 +724,15 @@
     enquiryForm.querySelector('button[type="submit"]').textContent = config.button;
     const visitDate = enquiryForm.querySelector('[name="visit_date"]');
     if(visitDate) { const d=new Date(); visitDate.min = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+    const googleEmbed = document.getElementById('googleEnquiryEmbed');
+    const useGoogleForm = window.HappyMindsForms?.render(googleEmbed) || false;
+    modal.querySelector('.modal-card').classList.toggle('google-form-mode',useGoogleForm);
+    enquiryForm.hidden = useGoogleForm;
+    googleEmbed.hidden = !useGoogleForm;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    const first = enquiryForm.querySelector('[data-field="parent"] input');
+    const first = useGoogleForm ? modal.querySelector('.close') : enquiryForm.querySelector('[data-field="parent"] input');
     if(first) window.setTimeout(() => first.focus({preventScroll:true}), 80);
   }
   function closeModal(){
