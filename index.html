@@ -413,6 +413,8 @@
   @media(prefers-reduced-motion:reduce){
     .gallery img,.navlinks a,.footer-links a{transition:none}
   }
+  button.link{border:0;background:transparent;padding:0;cursor:pointer;text-align:left;font:inherit;font-size:13px;font-weight:600;color:var(--gold)}
+  button.link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -502,7 +504,7 @@
         <div class="pill"><b>Science & Exploration</b>Ask questions. Discover why.</div>
         <div class="pill"><b>Languages & Environment</b>Connect with the world around us.</div>
       </div>
-      <a class="link" href="learning.html">How we teach →</a>
+      <a class="link" href="#wheel">Explore the Learning Wheel →</a>
     </div>
   </div>
 </section>
@@ -513,7 +515,7 @@
       <div class="section-eyebrow">The HAPPY Minds Learning Wheel™</div>
       <h2>8 things we intentionally develop.</h2>
       <p class="wheel-copy">Because a child is more than a report card. Our Learning Wheel™ brings together eight areas of development: academics, communication, character, creativity, physical well-being, emotional intelligence, leadership and self-learning.</p>
-      <a class="link" style="color:var(--gold-soft)" href="learning.html">Explore our learning approach →</a>
+      <a class="link" style="color:var(--gold-soft)" href="learning.html">Read about our learning approach →</a>
     </div>
     <div class="wheel-items reveal delay-1">
       <div class="wheel-item"><div class="dot"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M12 7v14"/><path d="M3 18V5a1 1 0 0 1 1-1h3a5 5 0 0 1 5 5 5 5 0 0 1 5-5h3a1 1 0 0 1 1 1v13h-4a5 5 0 0 0-5 3 5 5 0 0 0-5-3z"/></svg></div><b>Academics</b></div>
@@ -582,7 +584,7 @@
       <h2 class="section-title">Our school is taking shape.</h2>
       <p class="body-lg">We are preparing learning spaces for HAPPY Minds in Yadagirigutta. As work progresses, we will share real photographs and updates from the campus here.</p>
       <p class="body-lg" style="font-size:14px">The images above illustrate the learning experiences we envision; they are not a photographic record of completed campus facilities.</p>
-      <a class="link" href="admissions.html">Ask about a campus visit →</a>
+      <button type="button" class="link" onclick="openModal('campus-visit')">Request a campus visit →</button>
     </div>
     <div class="campus-progress-note reveal delay-1"><span class="section-eyebrow">Campus updates</span><h3>Real progress, shared as it happens.</h3><p>Classroom preparation, learning materials and outdoor spaces will be documented with actual campus photos when available.</p><span class="campus-progress-state">Preparing for opening in 2027</span></div>
   </div>
@@ -596,7 +598,7 @@
       <h2 class="section-title">A passionate team. A shared purpose.</h2>
       <p class="founder-quote">“We are building a school where children can learn deeply, grow confidently and still enjoy being children.”</p>
       <p class="body-lg">HAPPY Minds is an initiative of the Happy Minds Child Development Society — created with a simple belief that a better future begins with a better childhood.</p>
-      <a class="link" href="admissions.html">Admissions 2027 →</a>
+      <a class="link" href="#admissions">Explore admissions →</a>
     </div>
   </div>
 </section>
@@ -607,7 +609,7 @@
     <h2>Be part of the beginning.</h2>
     <p>Join the HAPPY Minds parent community, follow our journey and be the first to know when admissions open.</p>
     <div class="actions">
-      <a class="btn btn-primary" href="admissions.html">Admissions Information →</a>
+      <button type="button" class="btn btn-primary" onclick="openModal('admissions')">Enquire About Admissions →</button>
       <button class="btn" onclick="openModal('parent-community')">Join Parent Community</button>
       <button class="btn" onclick="openModal('campus-visit')">Book a Campus Visit</button>
     </div>
@@ -621,8 +623,8 @@
       <a class="brand" href="#"><img src="assets/logo-horizontal-light.png?v=2" alt="HAPPY Minds — Learning for Life" /></a>
       <p style="max-width:310px;margin-top:20px">Building smarter, stronger, happier kids through learning for life.</p>
     </div>
-    <div class="footer-links"><h4>Explore</h4><a href="#story">Our Story</a><a href="#learning">Our Approach</a><a href="learning.html">Learning Details</a></div>
-    <div class="footer-links"><h4>Admissions</h4><a href="admissions.html">Admissions 2027</a><a href="#life">Life at HAPPY Minds</a></div>
+    <div class="footer-links"><h4>Explore</h4><a href="#about">About HAPPY Minds</a><a href="#learning">Learning</a><a href="#life">Life at School</a></div>
+    <div class="footer-links"><h4>Admissions</h4><a href="#admissions">Admissions 2027</a><a href="admissions.html">Detailed admissions information</a></div>
     <div><h4>Visit</h4><p>Yadagirigutta<br>Yadadri Bhuvanagiri District<br>Telangana 508115</p><p><a href="tel:+919493294808">+91 94932 94808</a><br><a href="mailto:happymindsschool.ygt@gmail.com">happymindsschool.ygt@gmail.com</a></p><button class="btn btn-primary" onclick="openModal('general')">Talk to us →</button></div>
   </div>
   <div class="copyright"><span>© 2026 HAPPY Minds. All rights reserved.</span><span>Managed by Happy Minds Child Development Society · Yadagirigutta</span></div>
